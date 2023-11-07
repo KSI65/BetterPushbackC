@@ -814,20 +814,21 @@ read_gear_info(void)
 		}
 	}
 	/*
+ 	 * Comment out this section as it seems to flag up on all aircraft instead of just Tu-154M
 	 * The Tu-154M needs some special care here, because it overrides
 	 * gear_steers to 0 until the hydraulics are powered. We don't want
 	 * to refuse to work in that case, so just hard-set the nw_i to 0.
-	 */
-	if (acf_is_felis_tu154m()) {
-		bp.acf.nw_i = bp.acf.gear_is[0];
-		bp.acf.nw_z = tire_z[bp.acf.gear_is[0]];
-	}
-	if (bp.acf.nw_i == -1) {
-		XPLMSpeakString(_("Pushback failure: aircraft appears to not "
-		    "have any steerable gears."));
-		return (B_FALSE);
-	}
-
+	 
+	 *if (acf_is_felis_tu154m()) {
+	 *	bp.acf.nw_i = bp.acf.gear_is[0];
+	 *	bp.acf.nw_z = tire_z[bp.acf.gear_is[0]];
+	 *}
+	 *if (bp.acf.nw_i == -1) {
+	 *	XPLMSpeakString(_("Pushback failure: aircraft appears to not "
+	 *	    "have any steerable gears."));
+	 *	return (B_FALSE);
+	 *}
+	*/
 	/* Nose gear strut length and tire radius */
 	VERIFY3S(dr_getvf(&drs.leg_len, &bp.acf.nw_len, bp.acf.nw_i, 1), ==, 1);
 	VERIFY3S(dr_getvf(&drs.tirrad, &bp.acf.tirrad, bp.acf.nw_i, 1), ==, 1);
@@ -1134,7 +1135,7 @@ bp_init(void)
 	fdr_find(&drs.num_engns, "sim/aircraft/engine/acf_num_engines");
 	fdr_find(&drs.engn_running, "sim/flightmodel/engine/ENGN_running");
 	fdr_find(&drs.acf_livery_path, "sim/aircraft/view/acf_livery_path");
-	fdr_find(&drs.rwy_friction, "sim/weather/runway_friction");
+	fdr_find(&drs.rwy_friction, "sim/weather2/runway_friction");
 
 	fdr_find(&drs.landing_lights_on,
 	    "sim/cockpit/electrical/landing_lights_on");
