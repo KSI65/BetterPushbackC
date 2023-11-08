@@ -1,8 +1,6 @@
 name: Build&Publish Release
 
 on: [push]
-    tags:
-      - "v**"
 
 jobs:
   build-lin-win:
