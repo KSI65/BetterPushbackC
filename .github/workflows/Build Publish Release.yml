@@ -1,6 +1,6 @@
 name: Build&Publish Release
 
-on:[push]
+on: [push]
     tags:
       - "v**"
 
