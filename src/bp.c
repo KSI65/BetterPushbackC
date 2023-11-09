@@ -814,20 +814,22 @@ read_gear_info(void)
 		}
 	}
 	/*
- 	 * Comment out the whole section as it seems not to work in XP12
+ 	 * Change the nw check condition to stop the pushback failure message
 	 * The Tu-154M needs some special care here, because it overrides
 	 * gear_steers to 0 until the hydraulics are powered. We don't want
 	 * to refuse to work in that case, so just hard-set the nw_i to 0.
-	 *
+	*/
 	 if (acf_is_felis_tu154m()) {
 	 	bp.acf.nw_i = bp.acf.gear_is[0];
 	 	bp.acf.nw_z = tire_z[bp.acf.gear_is[0]];
 	 }
-	 *if (bp.acf.nw_i == -1) {
-	 *	XPLMSpeakString(_("Pushback failure: aircraft appears to not "
-	 *	    "have any steerable gears."));
-	 *	return (B_FALSE);
-	 *}
+	/* Comment out the nw check entirely */
+	/*
+	* if (bp.acf.nw_i == 0) {
+	* 	XPLMSpeakString(_("Pushback failure: aircraft appears to not "
+	* 	    "have any steerable gears."));
+	* 	return (B_FALSE);
+	* }
 	*/
  	/* Nose gear strut length and tire radius */
 	VERIFY3S(dr_getvf(&drs.leg_len, &bp.acf.nw_len, bp.acf.nw_i, 1), ==, 1);
