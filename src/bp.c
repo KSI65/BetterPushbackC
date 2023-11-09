@@ -819,10 +819,10 @@ read_gear_info(void)
 	 * gear_steers to 0 until the hydraulics are powered. We don't want
 	 * to refuse to work in that case, so just hard-set the nw_i to 0.
 	 *
-	 *if (acf_is_felis_tu154m()) {
-	 *	bp.acf.nw_i = bp.acf.gear_is[0];
-	 *	bp.acf.nw_z = tire_z[bp.acf.gear_is[0]];
-	 *}
+	 if (acf_is_felis_tu154m()) {
+	 	bp.acf.nw_i = bp.acf.gear_is[0];
+	 	bp.acf.nw_z = tire_z[bp.acf.gear_is[0]];
+	 }
 	 *if (bp.acf.nw_i == -1) {
 	 *	XPLMSpeakString(_("Pushback failure: aircraft appears to not "
 	 *	    "have any steerable gears."));
